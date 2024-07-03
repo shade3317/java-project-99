@@ -2,6 +2,7 @@ name: Java CI
 
 on:
   - push
+  - pull_request
 
 jobs:
   build:
@@ -9,23 +10,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Setup JDK 21
-        uses: actions/setup-java@v3
+      - uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
           java-version: '21'
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2
+          distribution: 'temurin'
+      - uses: gradle/gradle-build-action@v3
         with:
-          arguments: build
-        env:
-          SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_AUTH_TOKEN}}
-      - name: Test & publish code coverage
+          gradle-version: 8.7
+      - name: Publish code coverage
         uses: paambaati/codeclimate-action@v5.0.0
-        if: ${{ github.event_name == 'push' }}
         env:
           CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
-          JACOCO_SOURCE_PATH: src/main/java
+          JACOCO_SOURCE_PATH: app/src/main/java
         with:
           coverageCommand: make report
-          coverageLocations: ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
+          coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
