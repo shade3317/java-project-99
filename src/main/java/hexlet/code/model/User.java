@@ -47,3 +47,4 @@ public class User implements BaseEntity {
     @LastModifiedDate
     private LocalDate updatedAt;
 }
+
