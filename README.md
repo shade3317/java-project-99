@@ -8,3 +8,14 @@
 
 
 
+
+Locally, the application runs on port **8080** at: `http://localhost:8080`
+
+
+Administrator login: `hexlet@example.com`
+
+
+Administrator password: `qwerty`
+
+
+
