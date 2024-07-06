@@ -97,7 +97,7 @@ public class LabelControllerTests {
         labelRepository.save(testLabel);
 
         var data = new LabelUpdateDto();
-        data.setName(JsonNullable.of("test_name"));
+        data.setName(JsonNullable.of("name1"));
 
         var request = put("/api/labels/" + testLabel.getId())
                 .with(token)

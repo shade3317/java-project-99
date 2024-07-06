@@ -40,8 +40,9 @@ public class UserControllerTest {
     private UserRepository userRepository;
     @Autowired
     private ModelGenerator modelsGenerator;
-    private User testUser;
+
     private SecurityMockMvcRequestPostProcessors.JwtRequestPostProcessor token;
+    private User testUser;
 
     @BeforeEach
     public void setUser() {
