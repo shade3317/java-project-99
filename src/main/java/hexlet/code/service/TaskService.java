@@ -1,5 +1,10 @@
 package hexlet.code.service;
 
+//import hexlet.code.model.Label;
+import hexlet.code.model.Task;
+//import hexlet.code.model.TaskStatus;
+import hexlet.code.model.User;
+import hexlet.code.repository.LabelRepository;
 import hexlet.code.dto.TaskCreateDto;
 import hexlet.code.dto.TaskDto;
 import hexlet.code.dto.TaskParamsDto;
@@ -13,6 +18,7 @@ import hexlet.code.specification.TaskSpecification;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+//import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -23,6 +29,7 @@ public class TaskService {
     private final TaskSpecification taskSpecification;
     private final TaskStatusRepository taskStatusRepository;
     private final UserRepository userRepository;
+    private final LabelRepository labelRepository;
 
 /*     public List<TaskDto> getAll() {
         var tasks = taskRepository.findAll();
@@ -60,9 +67,36 @@ public class TaskService {
         var task = taskRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Задача с id " + id + " не найдена"));
         taskMapper.update(dto, task);
+        setAssociations(dto, task);
         taskRepository.save(task);
         var result = taskMapper.map(task);
         return result;
+    }
+
+
+    private void setAssociations(TaskUpdateDto taskRequest, Task task) {
+   /*        if (taskRequest.getDescription() != null) {
+            task.setDescription(taskRequest.getDescription().get());
+        }
+        TaskStatus taskStatus = null;
+        if (taskRequest.getStatus() != null) {
+            taskStatus = taskStatusRepository.findBySlug(taskRequest.getStatus().get()).orElseThrow();
+        }*/
+        // Почему маппер не меняет User, не понятно. Но так - работет!
+        User user = null;
+        if (taskRequest.getAssignee_id() != null) {
+            user = userRepository.findById(taskRequest.getAssignee_id().get()).orElseThrow();
+        }
+
+/*        List<Label> labels = null;
+        if (taskRequest.getTaskLabelIds() != null) {
+            labels = labelRepository.findAllById(taskRequest.getTaskLabelIds().get());
+        }
+        task.setTaskStatus(taskStatus);
+        task.setTaskStatus(taskStatus);*/
+        task.setAssignee(user);
+
+//        task.setLabels(labels != null ? new HashSet<>(labels) : new HashSet<>());
     }
 
     public void delete(Long id) {

@@ -12,10 +12,12 @@ import hexlet.code.repository.TaskStatusRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
+
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -36,7 +38,8 @@ public abstract class TaskMapper {
     @Mapping(source = "title", target = "name")
     @Mapping(source = "status", target = "taskStatus")
     @Mapping(source = "content", target = "description")
-    @Mapping(source = "taskLabelIds", target = "labels")
+    @Mapping(source = "taskLabelIds", target = "labels", qualifiedByName = "toEntity")
+    @Mapping(source = "assignee_id", target = "assignee.id")
     public abstract Task map(TaskCreateDto dto);
 
     @Mapping(source = "name", target = "title")
@@ -48,8 +51,10 @@ public abstract class TaskMapper {
 
     @Mapping(source = "title", target = "name")
     @Mapping(source = "status", target = "taskStatus")
+    //    @Mapping(source = "description", target = "description")
     @Mapping(source = "assignee_id", target = "assignee")
-    @Mapping(source = "taskLabelIds", target = "labels")
+    //    @Mapping(source = "assignee_id", target = "assignee.id")
+    @Mapping(source = "taskLabelIds", target = "labels", qualifiedByName = "toEntity")
     public abstract void update(TaskUpdateDto dto, @MappingTarget Task model);
 
     @Mapping(source = "taskStatus.slug", target = "status")
@@ -70,6 +75,7 @@ public abstract class TaskMapper {
                 .collect(Collectors.toSet());
     }
 
+    @Named("toEntity")
     public Set<Label> toEntity(Set<Long> labelIds) {
         if (labelIds == null) {
             return null;
