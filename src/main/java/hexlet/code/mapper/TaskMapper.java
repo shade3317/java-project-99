@@ -1,5 +1,4 @@
 package hexlet.code.mapper;
-
 import hexlet.code.dto.TaskCreateDto;
 import hexlet.code.dto.TaskDto;
 import hexlet.code.dto.TaskUpdateDto;
@@ -9,6 +8,10 @@ import hexlet.code.model.Task;
 import hexlet.code.model.TaskStatus;
 import hexlet.code.repository.LabelRepository;
 import hexlet.code.repository.TaskStatusRepository;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -17,9 +20,6 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Set;
-import java.util.stream.Collectors;
 
 
 @Mapper(
@@ -32,7 +32,7 @@ public abstract class TaskMapper {
     @Autowired
     private TaskStatusRepository statusRepository;
     @Autowired
-    private LabelRepository labelRepository;
+    private LabelRepository      labelRepository;
 
     @Mapping(source = "title", target = "name")
     @Mapping(source = "status", target = "taskStatus")
@@ -60,7 +60,6 @@ public abstract class TaskMapper {
     @Mapping(source = "description", target = "content")
     @Mapping(source = "labels", target = "taskLabelIds")
     public abstract TaskCreateDto mapToCreateDto(Task model);
-
 
     public TaskStatus toTaskStatus(String statusSlug) {
         return statusRepository.findBySlug(statusSlug)

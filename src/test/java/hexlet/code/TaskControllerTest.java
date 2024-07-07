@@ -1,6 +1,4 @@
 package hexlet.code;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import hexlet.code.dto.TaskUpdateDto;
 import hexlet.code.mapper.TaskMapper;
 import hexlet.code.model.Label;
@@ -12,6 +10,9 @@ import hexlet.code.repository.TaskStatusRepository;
 import hexlet.code.repository.TaskRepository;
 import hexlet.code.repository.UserRepository;
 import hexlet.code.util.ModelGenerator;
+
+import java.util.Set;
+
 import org.instancio.Instancio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,9 +22,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.Set;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -40,26 +39,27 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class TaskControllerTest {
     @Autowired
-    private MockMvc mockMvc;
+    private MockMvc              mockMvc;
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository       userRepository;
     @Autowired
-    private TaskRepository taskRepository;
+    private TaskRepository       taskRepository;
     @Autowired
     private TaskStatusRepository taskStatusRepository;
     @Autowired
-    private TaskMapper taskMapper;
+    private TaskMapper           taskMapper;
     @Autowired
-    private ObjectMapper objectMapper;
+    private ObjectMapper         objectMapper;
     @Autowired
-    private LabelRepository labelRepository;
+    private LabelRepository      labelRepository;
     @Autowired
-    private ModelGenerator modelGenerator;
+    private ModelGenerator       modelGenerator;
+    private User                 testUser;
+    private Task                 testTask;
+    private TaskStatus           testStatus;
+    private Label                testLabel;
+
     private JwtRequestPostProcessor token;
-    private User testUser;
-    private Task testTask;
-    private TaskStatus testStatus;
-    private Label testLabel;
 
     @BeforeEach
     public void setUp() {

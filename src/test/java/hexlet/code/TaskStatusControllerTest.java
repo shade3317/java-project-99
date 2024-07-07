@@ -1,11 +1,10 @@
 package hexlet.code;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import hexlet.code.dto.TaskStatusUpdateDto;
 import hexlet.code.mapper.TaskStatusMapper;
 import hexlet.code.model.TaskStatus;
 import hexlet.code.repository.TaskStatusRepository;
 import hexlet.code.util.ModelGenerator;
+
 import org.instancio.Instancio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -32,16 +31,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class TaskStatusControllerTest {
     @Autowired
-    private MockMvc mockMvc;
+    private MockMvc              mockMvc;
     @Autowired
-    private ObjectMapper objectMapper;
+    private ObjectMapper         objectMapper;
     @Autowired
     private TaskStatusRepository taskStatusRepository;
     @Autowired
-    private TaskStatusMapper taskStatusMapper;
+    private TaskStatusMapper     taskStatusMapper;
     @Autowired
-    private ModelGenerator modelsGenerator;
-    private TaskStatus testStatus;
+    private ModelGenerator       modelsGenerator;
+    private TaskStatus           testStatus;
+
     private JwtRequestPostProcessor token;
 
     @BeforeEach

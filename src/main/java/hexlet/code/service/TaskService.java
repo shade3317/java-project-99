@@ -1,5 +1,4 @@
 package hexlet.code.service;
-
 import hexlet.code.dto.TaskCreateDto;
 import hexlet.code.dto.TaskDto;
 import hexlet.code.dto.TaskParamsDto;
@@ -14,22 +13,23 @@ import hexlet.code.repository.TaskRepository;
 import hexlet.code.repository.UserRepository;
 import hexlet.code.repository.LabelRepository;
 import hexlet.code.specification.TaskSpecification;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
+
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 
 @Service
 @AllArgsConstructor
 public class TaskService {
-    private final TaskRepository taskRepository;
-    private final TaskMapper taskMapper;
-    private final TaskSpecification taskSpecification;
+    private final TaskRepository       taskRepository;
+    private final TaskMapper           taskMapper;
+    private final TaskSpecification    taskSpecification;
     private final TaskStatusRepository taskStatusRepository;
-    private final UserRepository userRepository;
-    private final LabelRepository labelRepository;
+    private final UserRepository       userRepository;
+    private final LabelRepository      labelRepository;
 
     public List<TaskDto> getAll(TaskParamsDto params) {
         var specification = taskSpecification.build(params);

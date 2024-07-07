@@ -1,11 +1,10 @@
 package hexlet.code;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import hexlet.code.dto.UserUpdateDTO;
 import hexlet.code.mapper.UserMapper;
 import hexlet.code.model.User;
 import hexlet.code.repository.UserRepository;
 import hexlet.code.util.ModelGenerator;
+
 import org.instancio.Instancio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -31,17 +31,18 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @AutoConfigureMockMvc
 public class UserControllerTest {
     @Autowired
-    private MockMvc mockMvc;
+    private MockMvc        mockMvc;
     @Autowired
-    private ObjectMapper objectMapper;
+    private ObjectMapper   objectMapper;
     @Autowired
-    private UserMapper userMapper;
+    private UserMapper     userMapper;
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private ModelGenerator modelsGenerator;
+    private User           testUser;
+
     private SecurityMockMvcRequestPostProcessors.JwtRequestPostProcessor token;
-    private User testUser;
 
     @BeforeEach
     public void setUser() {

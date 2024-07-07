@@ -1,9 +1,11 @@
 package hexlet.code.controller.api;
-
 import hexlet.code.dto.TaskStatusCreateDto;
 import hexlet.code.dto.TaskStatusDto;
 import hexlet.code.dto.TaskStatusUpdateDto;
 import hexlet.code.service.TaskStatusService;
+
+import java.util.List;
+
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,8 +19,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.List;
 
 
 @RestController

@@ -1,9 +1,10 @@
 package hexlet.code.util;
-
 import hexlet.code.dto.UserCreateDTO;
 import hexlet.code.model.Label;
 import hexlet.code.model.TaskStatus;
 import hexlet.code.model.User;
+import hexlet.code.model.Task;
+
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import net.datafaker.Faker;
@@ -12,21 +13,19 @@ import org.instancio.Model;
 import org.instancio.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import hexlet.code.model.Task;
 
 
 @Getter
 @Component
 public class ModelGenerator {
-
-    private Model<TaskStatus> testStatus;
-    private Model<User> testUser;
-    private Model<Task> testTask;
-    private Model<Label> testLabel;
+    private Model<TaskStatus>    testStatus;
+    private Model<User>          testUser;
+    private Model<Task>          testTask;
+    private Model<Label>         testLabel;
     private Model<UserCreateDTO> userCreateDTOModel;
 
     @Autowired
-    private Faker faker;
+    private Faker                faker;
 
     @PostConstruct
     private void init() {

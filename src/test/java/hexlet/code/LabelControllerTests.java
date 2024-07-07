@@ -1,12 +1,11 @@
 package hexlet.code;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import hexlet.code.dto.LabelUpdateDto;
 import hexlet.code.mapper.LabelMapper;
 import hexlet.code.model.Label;
 import hexlet.code.model.User;
 import hexlet.code.repository.LabelRepository;
 import hexlet.code.util.ModelGenerator;
+
 import org.instancio.Instancio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
@@ -33,17 +33,18 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @AutoConfigureMockMvc
 public class LabelControllerTests {
     @Autowired
-    private MockMvc mockMvc;
+    private MockMvc         mockMvc;
     @Autowired
     private LabelRepository labelRepository;
     @Autowired
-    private LabelMapper labelMapper;
+    private LabelMapper     labelMapper;
     @Autowired
-    private ObjectMapper objectMapper;
+    private ObjectMapper    objectMapper;
     @Autowired
-    private ModelGenerator modelsGenerator;
-    private Label testLabel;
-    private User testUser;
+    private ModelGenerator  modelsGenerator;
+    private Label           testLabel;
+    private User            testUser;
+
     private SecurityMockMvcRequestPostProcessors.JwtRequestPostProcessor token;
 
     @BeforeEach

@@ -1,5 +1,8 @@
 package hexlet.code.model;
 
+import java.time.LocalDate;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
@@ -18,9 +21,6 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDate;
-import java.util.Set;
-
 
 @Entity
 @Setter
@@ -30,26 +30,25 @@ import java.util.Set;
 public class Task implements BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long       id;
 
     @NotBlank
     @Size(min = 1)
-    private String name;
+    private String     name;
 
-    private int index;
-    private String description;
+    private int        index;
+    private String     description;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    private User assignee;
+    private User       assignee;
 
     @NotNull
     @ManyToOne(cascade = CascadeType.MERGE)
     private TaskStatus taskStatus;
 
     @CreatedDate
-    private LocalDate createdAt;
+    private LocalDate  createdAt;
 
-    @ManyToMany(cascade = CascadeType.MERGE,
-            fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<Label> labels;
 }

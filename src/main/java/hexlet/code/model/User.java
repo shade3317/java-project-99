@@ -1,5 +1,10 @@
 package hexlet.code.model;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Id;
@@ -21,11 +26,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 
 @Entity
 @Table(name = "users")
@@ -35,19 +35,17 @@ import java.util.List;
 public class User implements UserDetails, BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    private String firstName;
-
-    private String lastName;
+    private long      id;
+    private String    firstName;
+    private String    lastName;
 
     @Email
     @Column(unique = true)
-    private String email;
+    private String    email;
 
     @Size(min = 3)
     @NotBlank
-    private String password;
+    private String    password;
 
     @CreatedDate
     private LocalDate createdAt;

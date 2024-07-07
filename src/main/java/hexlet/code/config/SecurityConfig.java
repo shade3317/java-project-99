@@ -1,6 +1,6 @@
 package hexlet.code.config;
-
 import hexlet.code.service.CustomUserDetailsService;
+
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,16 +22,17 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 @AllArgsConstructor
 public class SecurityConfig {
     @Autowired
-    private JwtDecoder jwtDecoder;
+    private JwtDecoder               jwtDecoder;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private PasswordEncoder          passwordEncoder;
 
     @Autowired
     private CustomUserDetailsService userService;
@@ -57,6 +58,7 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .build();
     }
+
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
