@@ -13,7 +13,4 @@ start-prod:
 install-dist:
 	./gradlew clean installDist
 
-start-dist:
-	.S/build/install/app/bin/app
-
 .PHONY: build
