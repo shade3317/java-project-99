@@ -29,7 +29,7 @@ public class UserService {
 
     public UserDTO findById(Long id) {
         var user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Пользователь с id " + id + " не найден"));
         return userMapper.map(user);
     }
 
@@ -41,7 +41,7 @@ public class UserService {
 
     public UserDTO update(UserUpdateDTO userUpdateDTO, Long id) {
         var user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Пользователь с id " + id + " не найден"));
         userMapper.update(userUpdateDTO, user);
         userRepository.save(user);
         return userMapper.map(user);
@@ -49,7 +49,7 @@ public class UserService {
 
     public void delete(Long id) {
         var user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Пользователь с id " + id + " не найден"));
         userRepository.deleteById(id);
     }
 }

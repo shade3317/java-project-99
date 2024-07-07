@@ -63,7 +63,7 @@ public abstract class TaskMapper {
 
     public TaskStatus toTaskStatus(String statusSlug) {
         return statusRepository.findBySlug(statusSlug)
-                .orElseThrow(() -> new ResourceNotFoundException("TaskStatus with slug " + statusSlug + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("TaskStatus с slug " + statusSlug + " не найден"));
     }
 
     public Set<Long> toDto(Set<Label> labels) {

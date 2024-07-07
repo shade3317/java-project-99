@@ -28,7 +28,7 @@ public class TaskStatusService {
 
     public TaskStatusDto findById(Long id) {
         var status = taskStatusRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Status with id " + id + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Статус с id " + id + " не найден"));
 
         var result = taskStatusMapper.map(status);
         return result;
@@ -43,7 +43,7 @@ public class TaskStatusService {
 
     public TaskStatusDto update(TaskStatusUpdateDto dto, Long id) {
         var status = taskStatusRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Status with id " + id + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Статус с id " + id + " не найден"));
 
         taskStatusMapper.update(dto, status);
         taskStatusRepository.save(status);
@@ -53,7 +53,7 @@ public class TaskStatusService {
 
     public void delete(Long id) {
         var status = taskStatusRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Status with id " + id + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Статус с id " + id + " не найден"));
         taskStatusRepository.deleteById(id);
     }
 }
