@@ -11,16 +11,16 @@ import hexlet.code.repository.LabelRepository;
 import hexlet.code.repository.TaskStatusRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.Named;
-import org.mapstruct.ReportingPolicy;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.ReportingPolicy;
+import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
-
 
 import java.util.Set;
 import java.util.stream.Collectors;
+
 
 @Mapper(
         uses = {JsonNullableMapper.class},
@@ -31,7 +31,6 @@ import java.util.stream.Collectors;
 public abstract class TaskMapper {
     @Autowired
     private TaskStatusRepository statusRepository;
-
     @Autowired
     private LabelRepository labelRepository;
 
@@ -51,9 +50,7 @@ public abstract class TaskMapper {
 
     @Mapping(source = "title", target = "name")
     @Mapping(source = "status", target = "taskStatus")
-    //    @Mapping(source = "description", target = "description")
     @Mapping(source = "assignee_id", target = "assignee")
-    //    @Mapping(source = "assignee_id", target = "assignee.id")
     @Mapping(source = "taskLabelIds", target = "labels", qualifiedByName = "toEntity")
     public abstract void update(TaskUpdateDto dto, @MappingTarget Task model);
 
@@ -64,13 +61,14 @@ public abstract class TaskMapper {
     @Mapping(source = "labels", target = "taskLabelIds")
     public abstract TaskCreateDto mapToCreateDto(Task model);
 
+
     public TaskStatus toTaskStatus(String statusSlug) {
         return statusRepository.findBySlug(statusSlug)
                 .orElseThrow(() -> new ResourceNotFoundException("TaskStatus with slug " + statusSlug + " not found"));
     }
 
     public Set<Long> toDto(Set<Label> labels) {
-        return labels.stream()
+        return labels == null ? null : labels.stream()
                 .map(Label::getId)
                 .collect(Collectors.toSet());
     }

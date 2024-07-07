@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import hexlet.code.model.User;
 import hexlet.code.repository.UserRepository;
 
+
 @Component
 public class UserUtils {
     @Autowired

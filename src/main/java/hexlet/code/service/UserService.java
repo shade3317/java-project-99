@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class UserService {
     @Autowired
@@ -45,7 +46,6 @@ public class UserService {
         userRepository.save(user);
         return userMapper.map(user);
     }
-
     public void delete(Long id) {
         var user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));

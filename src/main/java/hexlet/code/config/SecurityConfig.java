@@ -27,7 +27,6 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 @EnableMethodSecurity
 @AllArgsConstructor
 public class SecurityConfig {
-
     @Autowired
     private JwtDecoder jwtDecoder;
 
@@ -72,4 +71,3 @@ public class SecurityConfig {
         return provider;
     }
 }
-

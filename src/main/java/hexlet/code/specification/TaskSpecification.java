@@ -5,6 +5,7 @@ import hexlet.code.model.Task;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class TaskSpecification {
     public Specification<Task> build(TaskParamsDto params) {
@@ -39,4 +40,3 @@ public class TaskSpecification {
                 : criteriaBuilder.equal(root.get("labels").get("id"), id);
     }
 }
-

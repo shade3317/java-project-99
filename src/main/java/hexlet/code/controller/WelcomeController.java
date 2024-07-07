@@ -11,4 +11,3 @@ public class WelcomeController {
         return "Welcome to Spring";
     }
 }
-

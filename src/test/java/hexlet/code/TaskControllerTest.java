@@ -21,6 +21,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
 import java.util.Set;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
@@ -33,6 +34,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -53,7 +55,6 @@ public class TaskControllerTest {
     private LabelRepository labelRepository;
     @Autowired
     private ModelGenerator modelGenerator;
-
     private JwtRequestPostProcessor token;
     private User testUser;
     private Task testTask;
@@ -91,7 +92,6 @@ public class TaskControllerTest {
 
     @Test
     public void testShow() throws Exception {
-        //taskRepository.save(testTask);
         var request = get("/api/tasks/" + testTask.getId()).with(token);
         var result = mockMvc.perform(request)
                 .andExpect(status().isOk())
@@ -131,7 +131,6 @@ public class TaskControllerTest {
 
     @Test
     public void testUpdate() throws Exception {
-        //taskRepository.save(testTask);
         var data = new TaskUpdateDto();
         data.setTitle(JsonNullable.of("title1"));
         data.setDescription(JsonNullable.of("description1"));
@@ -152,7 +151,6 @@ public class TaskControllerTest {
 
     @Test
     public void testDestroy() throws Exception {
-        //taskRepository.save(testTask);
         var request = delete("/api/tasks/" + testTask.getId()).with(token);
 
         mockMvc.perform(request)
@@ -161,4 +159,3 @@ public class TaskControllerTest {
         assertThat(taskRepository.existsById(testTask.getId())).isEqualTo(false);
     }
 }
-

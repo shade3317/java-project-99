@@ -1,19 +1,18 @@
 package hexlet.code.model;
 
-//import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.EntityListeners;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.FetchType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import jakarta.persistence.FetchType;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -21,6 +20,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.util.Set;
+
 
 @Entity
 @Setter
@@ -37,7 +37,6 @@ public class Task implements BaseEntity {
     private String name;
 
     private int index;
-
     private String description;
 
     @ManyToOne(cascade = CascadeType.MERGE)
@@ -54,4 +53,3 @@ public class Task implements BaseEntity {
             fetch = FetchType.EAGER)
     private Set<Label> labels;
 }
-

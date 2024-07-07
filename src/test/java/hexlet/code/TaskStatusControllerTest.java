@@ -27,6 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TaskStatusControllerTest {
@@ -112,7 +113,6 @@ public class TaskStatusControllerTest {
     @Test
     public void testDestroy() throws Exception {
         taskStatusRepository.save(testStatus);
-
         var request = delete("/api/task_statuses/" + testStatus.getId()).with(token);
 
         mockMvc.perform(request)
@@ -121,3 +121,4 @@ public class TaskStatusControllerTest {
         assertThat(taskStatusRepository.existsById(testStatus.getId())).isEqualTo(false);
     }
 }
+

@@ -55,6 +55,7 @@ public class User implements UserDetails, BaseEntity {
     @LastModifiedDate
     private LocalDate updatedAt;
 
+
     @OneToMany(mappedBy = "assignee", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Task> tasks = new ArrayList<>();
 
@@ -93,4 +94,3 @@ public class User implements UserDetails, BaseEntity {
         return true;
     }
 }
-

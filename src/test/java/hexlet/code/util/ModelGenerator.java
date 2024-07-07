@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import hexlet.code.model.Task;
 
+
 @Getter
 @Component
 public class ModelGenerator {
@@ -41,7 +42,6 @@ public class ModelGenerator {
                 .supply(Select.field(TaskStatus::getName), () -> faker.name().name())
                 .supply(Select.field(TaskStatus::getSlug), () -> faker.internet().slug())
                 .toModel();
-
         testTask = Instancio.of(Task.class)
                 .ignore(Select.field(Task::getId))
                 .ignore(Select.field(Task::getTaskStatus))
@@ -51,11 +51,11 @@ public class ModelGenerator {
                 .supply(Select.field(Task::getIndex), () -> faker.number().positive())
                 .supply(Select.field(Task::getDescription), () -> faker.lorem().sentence())
                 .toModel();
-
         testLabel = Instancio.of(Label.class)
                 .ignore(Select.field(Label::getId))
                 .supply(Select.field(Label::getName), () -> faker.lorem().characters(3, 1000))
                 .toModel();
+
 
         userCreateDTOModel = Instancio.of(UserCreateDTO.class)
                 .supply(Select.field(UserCreateDTO::getEmail), () -> faker.internet().emailAddress())

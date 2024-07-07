@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 @AllArgsConstructor
 public class LabelService {
@@ -51,4 +52,3 @@ public class LabelService {
         labelRepository.deleteById(id);
     }
 }
-

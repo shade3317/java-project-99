@@ -23,7 +23,6 @@ public class DataInitializer implements ApplicationRunner {
     private final TaskStatusRepository taskStatusRepository;
     private final UserRepository userRepository;
     private LabelRepository labelRepository;
-
     @Autowired
     private final CustomUserDetailsService userService;
 
@@ -59,4 +58,5 @@ public class DataInitializer implements ApplicationRunner {
                 }).toList();
 
     }
+
 }

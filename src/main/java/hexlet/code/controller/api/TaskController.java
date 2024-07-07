@@ -29,6 +29,7 @@ public class TaskController {
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
+
     public ResponseEntity<List<TaskDto>> index(TaskParamsDto params) {
         var tasks = taskService.getAll(params);
         return ResponseEntity.ok()
@@ -62,4 +63,3 @@ public class TaskController {
         taskService.delete(id);
     }
 }
-

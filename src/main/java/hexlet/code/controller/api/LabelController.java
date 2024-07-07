@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api/labels")
 @AllArgsConstructor
@@ -58,4 +59,3 @@ public class LabelController {
         labelService.delete(id);
     }
 }
-

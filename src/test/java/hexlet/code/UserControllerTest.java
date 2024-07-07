@@ -16,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
-
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -26,6 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -40,7 +40,6 @@ public class UserControllerTest {
     private UserRepository userRepository;
     @Autowired
     private ModelGenerator modelsGenerator;
-
     private SecurityMockMvcRequestPostProcessors.JwtRequestPostProcessor token;
     private User testUser;
 
@@ -53,7 +52,6 @@ public class UserControllerTest {
     @Test
     public void testIndex() throws Exception {
         userRepository.save(testUser);
-
         var result = mockMvc.perform(get("/api/users").with(token))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -64,7 +62,6 @@ public class UserControllerTest {
     @Test
     public void testShow() throws Exception {
         userRepository.save(testUser);
-
         var request = get("/api/users/" + testUser.getId()).with(token);
 
         var result = mockMvc.perform(request)
@@ -80,7 +77,6 @@ public class UserControllerTest {
     @Test
     public void testCreate() throws Exception {
         var createDto = userMapper.mapToCreateDto(testUser);
-        //        var userCreateDTO = Instancio.of(modelsGenerator.getUserCreateDTOModel()).create();
 
         var request = post("/api/users").with(token)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -97,7 +93,6 @@ public class UserControllerTest {
     @Test
     public void testUpdate() throws Exception {
         userRepository.save(testUser);
-
         var updateDto = new UserUpdateDTO();
         updateDto.setFirstName(JsonNullable.of("name1"));
         updateDto.setLastName(JsonNullable.of("lastName1"));
@@ -111,15 +106,14 @@ public class UserControllerTest {
                 .andExpect(status().isOk());
 
         var user = userRepository.findById(testUser.getId()).get();
-
         assertNotNull(user);
         assertThat(user.getFirstName()).isEqualTo(updateDto.getFirstName().get());
         assertThat(user.getLastName()).isEqualTo(updateDto.getLastName().get());
     }
+
     @Test
     public void testDelete() throws Exception {
         userRepository.save(testUser);
-
         var request = delete("/api/users/" + testUser.getId()).with(token);
 
         mockMvc.perform(request)
@@ -133,13 +127,11 @@ public class UserControllerTest {
         userRepository.save(testUser);
         var result = mockMvc.perform(get("/users"))
                 .andExpect(status().isUnauthorized());
-
     }
 
     @Test
     public void testShowWithoutAuth() throws Exception {
         userRepository.save(testUser);
-
         var request = get("/users/{id}", testUser.getId());
         var result = mockMvc.perform(request)
                 .andExpect(status().isUnauthorized());

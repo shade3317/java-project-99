@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 @AllArgsConstructor
 public class TaskStatusService {
@@ -21,7 +22,6 @@ public class TaskStatusService {
     public List<TaskStatusDto> getAll() {
         var statuses = taskStatusRepository.findAll();
         var result = statuses.stream()
-                //                .map(taskStatusMapper::map)
                 .map(t -> taskStatusMapper.map(t))
                 .toList();
         return result;
@@ -55,4 +55,3 @@ public class TaskStatusService {
         taskStatusRepository.deleteById(id);
     }
 }
-
