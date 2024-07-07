@@ -73,7 +73,7 @@ sentry {
 	// code as part of your stack traces in Sentry.
 	includeSourceContext = true
 
-	org = "kvv"
+	org = "hexlet-dg"
 	projectName = "java-project-99"
 	authToken = System.getenv("SENTRY_AUTH_TOKEN")
 }
