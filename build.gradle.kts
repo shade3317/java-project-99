@@ -74,7 +74,7 @@ sentry {
 	includeSourceContext = true
 
 	org = "kvv"
-	projectName = "java-spring-boot"
+	projectName = "java-project-99"
 	authToken = System.getenv("SENTRY_AUTH_TOKEN")
 }
 
