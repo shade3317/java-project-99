@@ -41,13 +41,19 @@ public class UserControllerTest {
     @Autowired
     private ModelGenerator modelsGenerator;
     private User           testUser;
+    private User           anotherUser;
 
     private SecurityMockMvcRequestPostProcessors.JwtRequestPostProcessor token;
+    private SecurityMockMvcRequestPostProcessors.JwtRequestPostProcessor tokenAnotherUser;
+
 
     @BeforeEach
     public void setUser() {
         testUser = Instancio.of(modelsGenerator.getTestUser()).create();
         token = jwt().jwt(builder -> builder.subject(testUser.getEmail()));
+
+        anotherUser      = Instancio.of(modelsGenerator.getTestUser()).create();
+        tokenAnotherUser = jwt().jwt(builder -> builder.subject(anotherUser.getEmail()));
     }
 
     @Test
@@ -124,17 +130,20 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testIndexWithoutAuth() throws Exception {
+    public void testUpdateUserAnotherUser() throws Exception {
         userRepository.save(testUser);
-        var result = mockMvc.perform(get("/users"))
-                .andExpect(status().isUnauthorized());
-    }
+        userRepository.save(anotherUser);
 
-    @Test
-    public void testShowWithoutAuth() throws Exception {
-        userRepository.save(testUser);
-        var request = get("/users/{id}", testUser.getId());
-        var result = mockMvc.perform(request)
-                .andExpect(status().isUnauthorized());
+        var updateDto = new UserUpdateDTO();
+        updateDto.setFirstName(JsonNullable.of("name2"));
+        updateDto.setLastName(JsonNullable.of("lastName2"));
+
+        var request = put("/api/users/" + testUser.getId())
+                .with(tokenAnotherUser)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(updateDto));
+
+        mockMvc.perform(request)
+                .andExpect(status().isForbidden());
     }
 }
