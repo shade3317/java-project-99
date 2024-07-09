@@ -5,17 +5,10 @@ import hexlet.code.dto.task.TaskParamsDto;
 import hexlet.code.dto.task.TaskUpdateDto;
 import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.mapper.TaskMapper;
-import hexlet.code.model.Label;
-import hexlet.code.model.TaskStatus;
-import hexlet.code.model.User;
-import hexlet.code.repository.TaskStatusRepository;
 import hexlet.code.repository.TaskRepository;
-import hexlet.code.repository.UserRepository;
-import hexlet.code.repository.LabelRepository;
 import hexlet.code.specification.TaskSpecification;
 
 import java.util.List;
-import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,9 +20,6 @@ public class TaskService {
     private final TaskRepository       taskRepository;
     private final TaskMapper           taskMapper;
     private final TaskSpecification    taskSpecification;
-    private final TaskStatusRepository taskStatusRepository;
-    private final UserRepository       userRepository;
-    private final LabelRepository      labelRepository;
 
     public List<TaskDto> getAll(TaskParamsDto params) {
         var specification = taskSpecification.build(params);
@@ -51,24 +41,6 @@ public class TaskService {
     public TaskDto create(TaskCreateDto dto) {
         var task = taskMapper.map(dto);
 
-        User assignee = null;
-        if (dto.getAssignee_id() != 0L) {
-            assignee = userRepository.findById(dto.getAssignee_id()).orElse(null);
-        }
-        task.setAssignee(assignee);
-
-        TaskStatus taskStatus = null;
-        if (dto.getStatus() != null) {
-            taskStatus = taskStatusRepository.findBySlug(dto.getStatus()).orElse(null);
-        }
-        task.setTaskStatus(taskStatus);
-
-        Set<Label> labelSet = null;
-        if (dto.getTaskLabelIds() != null) {
-            labelSet = labelRepository.findByIdIn((dto.getTaskLabelIds())).orElse(null);
-        }
-        task.setLabels(labelSet);
-
         taskRepository.save(task);
         return taskMapper.map(task);
     }
@@ -78,27 +50,8 @@ public class TaskService {
                 .orElseThrow(() -> new ResourceNotFoundException("Задача с id: " + taskId + " не найдена"));
 
         taskMapper.update(data, task);
-
-        var assigneeId = data.getAssignee_id();
-        if (assigneeId != null) {
-            var assignee = assigneeId.get() == null ? null
-                    : userRepository.findById(assigneeId.get()).orElseThrow();
-            task.setAssignee(assignee);
-        }
-
-        TaskStatus taskStatus = null;
-        if (data.getStatus() != null) {
-            taskStatus = taskStatusRepository.findBySlug(data.getStatus().get()).orElse(null);
-            task.setTaskStatus(taskStatus);
-        }
-
-        Set<Label> labelSet = null;
-        if (data.getTaskLabelIds() != null) {
-            labelSet = labelRepository.findByIdIn((data.getTaskLabelIds()).get()).orElse(null);
-            task.setLabels(labelSet);
-        }
-
         taskRepository.save(task);
+
         return taskMapper.map(task);
     }
 
