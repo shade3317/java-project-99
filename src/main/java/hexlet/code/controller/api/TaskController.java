@@ -1,8 +1,8 @@
 package hexlet.code.controller.api;
-import hexlet.code.dto.TaskCreateDto;
-import hexlet.code.dto.TaskDto;
-import hexlet.code.dto.TaskParamsDto;
-import hexlet.code.dto.TaskUpdateDto;
+import hexlet.code.dto.task.TaskCreateDto;
+import hexlet.code.dto.task.TaskDto;
+import hexlet.code.dto.task.TaskParamsDto;
+import hexlet.code.dto.task.TaskUpdateDto;
 import hexlet.code.service.TaskService;
 
 import java.util.List;

@@ -1,5 +1,5 @@
 package hexlet.code;
-import hexlet.code.dto.LabelUpdateDto;
+import hexlet.code.dto.label.LabelUpdateDto;
 import hexlet.code.mapper.LabelMapper;
 import hexlet.code.model.Label;
 import hexlet.code.model.User;

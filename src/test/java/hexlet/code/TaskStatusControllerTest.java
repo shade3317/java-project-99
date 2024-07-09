@@ -1,5 +1,5 @@
 package hexlet.code;
-import hexlet.code.dto.TaskStatusUpdateDto;
+import hexlet.code.dto.taskstatus.TaskStatusUpdateDto;
 import hexlet.code.mapper.TaskStatusMapper;
 import hexlet.code.model.TaskStatus;
 import hexlet.code.repository.TaskStatusRepository;

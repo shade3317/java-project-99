@@ -1,5 +1,5 @@
 package hexlet.code;
-import hexlet.code.dto.TaskUpdateDto;
+import hexlet.code.dto.task.TaskUpdateDto;
 import hexlet.code.mapper.TaskMapper;
 import hexlet.code.model.Label;
 import hexlet.code.model.Task;

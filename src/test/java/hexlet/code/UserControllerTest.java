@@ -1,5 +1,5 @@
 package hexlet.code;
-import hexlet.code.dto.UserUpdateDTO;
+import hexlet.code.dto.user.UserUpdateDTO;
 import hexlet.code.mapper.UserMapper;
 import hexlet.code.model.User;
 import hexlet.code.repository.UserRepository;

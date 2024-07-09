@@ -1,4 +1,4 @@
-package hexlet.code.dto;
+package hexlet.code.dto.label;
 
 import java.time.LocalDate;
 
@@ -9,11 +9,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserDTO {
+public class LabelDto {
     private Long      id;
-    private String    firstName;
-    private String    lastName;
-    private String    email;
+    private String    name;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
 }

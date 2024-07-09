@@ -1,5 +1,5 @@
 package hexlet.code.controller.api;
-import hexlet.code.dto.AuthRequest;
+import hexlet.code.dto.auth.AuthRequest;
 import hexlet.code.util.JWTUtils;
 
 import lombok.AllArgsConstructor;
