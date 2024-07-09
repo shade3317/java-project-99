@@ -30,7 +30,7 @@ public class TaskController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<TaskDto>> index(TaskParamsDto params) {
+    public ResponseEntity<List<TaskDto>> getAll(TaskParamsDto params) {
         var tasks = taskService.getAll(params);
         return ResponseEntity.ok()
                 .header("X-Total-Count", String.valueOf(tasks.size()))
@@ -39,13 +39,13 @@ public class TaskController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<TaskDto> show(@PathVariable long id) {
+    public ResponseEntity<TaskDto> getById(@PathVariable long id) {
         var task = taskService.findById(id);
         return ResponseEntity.ok()
                 .body(task);
     }
 
-    @PostMapping
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public TaskDto create(@Valid @RequestBody TaskCreateDto dto) {
         return taskService.create(dto);
@@ -59,7 +59,7 @@ public class TaskController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void destroy(@PathVariable long id) {
+    public void delete(@PathVariable long id) {
         taskService.delete(id);
     }
 }

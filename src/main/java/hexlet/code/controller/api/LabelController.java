@@ -29,7 +29,7 @@ public class LabelController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<LabelDto>> index() {
+    public ResponseEntity<List<LabelDto>> getAll() {
         var labels = labelService.getAll();
         return ResponseEntity.ok()
                 .header("X-Total-Count", String.valueOf(labels.size()))
@@ -38,11 +38,11 @@ public class LabelController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public LabelDto show(@PathVariable long id) {
+    public LabelDto getById(@PathVariable long id) {
         return labelService.getById(id);
     }
 
-    @PostMapping
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public LabelDto create(@Valid @RequestBody LabelCreateDto dto) {
         return labelService.create(dto);
@@ -56,7 +56,7 @@ public class LabelController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void destroy(@PathVariable long id) {
+    public void delete(@PathVariable long id) {
         labelService.delete(id);
     }
 }

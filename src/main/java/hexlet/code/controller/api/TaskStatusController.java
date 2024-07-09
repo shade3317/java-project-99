@@ -29,7 +29,7 @@ public class TaskStatusController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    ResponseEntity<List<TaskStatusDto>> index() {
+    ResponseEntity<List<TaskStatusDto>> getAll() {
         var tasksStatuses = statusService.getAll();
         return ResponseEntity.ok()
                 .header("X-Total-Count", String.valueOf(tasksStatuses.size()))
@@ -38,13 +38,13 @@ public class TaskStatusController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    ResponseEntity<TaskStatusDto> show(@PathVariable Long id) {
+    ResponseEntity<TaskStatusDto> getById(@PathVariable Long id) {
         var taskStatus = statusService.findById(id);
         return ResponseEntity.ok()
                 .body(taskStatus);
     }
 
-    @PostMapping
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public TaskStatusDto create(@Valid @RequestBody TaskStatusCreateDto dto) {
         return statusService.create(dto);
@@ -58,7 +58,7 @@ public class TaskStatusController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void destroy(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         statusService.delete(id);
     }
 }
