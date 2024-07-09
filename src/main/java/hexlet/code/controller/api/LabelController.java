@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 public class LabelController {
     private final LabelService labelService;
 
-    @GetMapping("")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<LabelDto>> index() {
         var labels = labelService.getAll();
@@ -42,7 +42,7 @@ public class LabelController {
         return labelService.getById(id);
     }
 
-    @PostMapping("")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public LabelDto create(@Valid @RequestBody LabelCreateDto dto) {
         return labelService.create(dto);

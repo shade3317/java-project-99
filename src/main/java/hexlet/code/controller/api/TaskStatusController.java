@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class TaskStatusController {
     private final TaskStatusService statusService;
 
-    @GetMapping("")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     ResponseEntity<List<TaskStatusDto>> index() {
         var tasksStatuses = statusService.getAll();
@@ -44,7 +44,7 @@ public class TaskStatusController {
                 .body(taskStatus);
     }
 
-    @PostMapping("")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public TaskStatusDto create(@Valid @RequestBody TaskStatusCreateDto dto) {
         return statusService.create(dto);

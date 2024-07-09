@@ -31,7 +31,7 @@ public class UserController {
         """;
     private final UserService userService;
 
-    @GetMapping("")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<UserDTO>> index() {
         var users = userService.getAll();
@@ -48,7 +48,7 @@ public class UserController {
                 .body(user);
     }
 
-    @PostMapping("")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserDTO create(@Valid @RequestBody UserCreateDTO dto) {
         return userService.create(dto);
