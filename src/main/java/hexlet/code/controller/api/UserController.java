@@ -30,6 +30,7 @@ public class UserController {
             @userRepository.findById(#id).get().getEmail() == authentication.getName()
         """;
     private final UserService userService;
+
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<UserDTO>> index() {

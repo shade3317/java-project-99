@@ -20,14 +20,20 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class DataInitializer implements ApplicationRunner {
+    @Autowired
     private final TaskStatusRepository     taskStatusRepository;
+
+    @Autowired
     private final UserRepository           userRepository;
-    private       LabelRepository          labelRepository;
+
+    @Autowired
+    private final LabelRepository          labelRepository;
 
     @Autowired
     private final CustomUserDetailsService userService;
 
-    private       PasswordEncoder          encoder;
+    @Autowired
+    private final PasswordEncoder          encoder;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
