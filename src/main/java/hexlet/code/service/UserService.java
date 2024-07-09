@@ -48,8 +48,6 @@ public class UserService {
     }
 
     public void delete(Long id) {
-        var user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Пользователь с id " + id + " не найден"));
         userRepository.deleteById(id);
     }
 }

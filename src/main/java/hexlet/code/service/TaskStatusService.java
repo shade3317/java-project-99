@@ -52,8 +52,6 @@ public class TaskStatusService {
     }
 
     public void delete(Long id) {
-        var status = taskStatusRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Статус с id " + id + " не найден"));
         taskStatusRepository.deleteById(id);
     }
 }

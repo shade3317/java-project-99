@@ -47,8 +47,6 @@ public class LabelService {
     }
 
     public void delete(Long id) {
-        var label = labelRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Метка с id " + id + " не найдена"));
         labelRepository.deleteById(id);
     }
 }
