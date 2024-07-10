@@ -34,6 +34,7 @@ public abstract class TaskMapper {
     @Autowired
     private LabelRepository      labelRepository;
 
+
     @Mapping(source = "title", target = "name")
     @Mapping(source = "status", target = "taskStatus")
     @Mapping(source = "content", target = "description")
