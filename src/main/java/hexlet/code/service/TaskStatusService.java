@@ -2,7 +2,7 @@ package hexlet.code.service;
 import hexlet.code.dto.taskstatus.TaskStatusCreateDto;
 import hexlet.code.dto.taskstatus.TaskStatusDto;
 import hexlet.code.dto.taskstatus.TaskStatusUpdateDto;
-import hexlet.code.exception.ResourceNotFoundException;
+//import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.mapper.TaskStatusMapper;
 import hexlet.code.repository.TaskStatusRepository;
 
@@ -28,7 +28,7 @@ public class TaskStatusService {
 
     public TaskStatusDto findById(Long id) {
         var status = taskStatusRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Статус с id " + id + " не найден"));
+                .orElseThrow(() -> new RuntimeException("Статус с id " + id + " не найден"));
 
         var result = taskStatusMapper.map(status);
         return result;
@@ -43,7 +43,7 @@ public class TaskStatusService {
 
     public TaskStatusDto update(TaskStatusUpdateDto dto, Long id) {
         var status = taskStatusRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Статус с id " + id + " не найден"));
+                .orElseThrow(() -> new RuntimeException("Статус с id " + id + " не найден"));
 
         taskStatusMapper.update(dto, status);
         taskStatusRepository.save(status);

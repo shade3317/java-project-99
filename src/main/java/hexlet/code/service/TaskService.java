@@ -3,7 +3,7 @@ import hexlet.code.dto.task.TaskCreateDto;
 import hexlet.code.dto.task.TaskDto;
 import hexlet.code.dto.task.TaskParamsDto;
 import hexlet.code.dto.task.TaskUpdateDto;
-import hexlet.code.exception.ResourceNotFoundException;
+//import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.mapper.TaskMapper;
 import hexlet.code.repository.TaskRepository;
 import hexlet.code.specification.TaskSpecification;
@@ -37,7 +37,7 @@ public class TaskService {
 
     public TaskDto findById(Long id) {
         var task = taskRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Задача с id " + id + " не найдена"));
+                .orElseThrow(() -> new RuntimeException("Задача с id " + id + " не найдена"));
 
         var result = taskMapper.map(task);
         return result;
@@ -58,7 +58,7 @@ public class TaskService {
 
     public TaskDto update(TaskUpdateDto data, Long taskId) {
         var task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new ResourceNotFoundException("Задача с id: " + taskId + " не найдена"));
+                .orElseThrow(() -> new RuntimeException("Задача с id: " + taskId + " не найдена"));
 
         taskMapper.update(data, task);
 
