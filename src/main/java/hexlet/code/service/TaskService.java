@@ -21,7 +21,7 @@ import hexlet.code.model.User;
 import hexlet.code.repository.TaskStatusRepository;
 
 import hexlet.code.repository.UserRepository;
-import hexlet.code.repository.LabelRepository;
+//import hexlet.code.repository.LabelRepository;
 
 //import java.util.Set;
 //
