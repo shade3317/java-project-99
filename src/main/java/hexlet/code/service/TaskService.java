@@ -17,10 +17,10 @@ import org.springframework.stereotype.Service;
 //
 //import hexlet.code.model.Label;
 //import hexlet.code.model.TaskStatus;
-import hexlet.code.model.User;
+//import hexlet.code.model.User;
 //import hexlet.code.repository.TaskStatusRepository;
 
-import hexlet.code.repository.UserRepository;
+//import hexlet.code.repository.UserRepository;
 //import hexlet.code.repository.LabelRepository;
 
 //import java.util.Set;
@@ -34,7 +34,7 @@ public class TaskService {
     private final TaskMapper           taskMapper;
     private final TaskSpecification    taskSpecification;
     //private final TaskStatusRepository taskStatusRepository;
-    private final UserRepository       userRepository;
+    //private final UserRepository       userRepository;
     //private final LabelRepository      labelRepository;
 
 
@@ -59,11 +59,11 @@ public class TaskService {
         var task = taskMapper.map(dto);
 
         //
-        User assignee = null;
-        if (dto.getAssignee_id() != 0L) {
-            assignee = userRepository.findById(dto.getAssignee_id()).orElse(null);
-        }
-        task.setAssignee(assignee);
+//        User assignee = null;
+//        if (dto.getAssignee_id() != 0L) {
+//            assignee = userRepository.findById(dto.getAssignee_id()).orElse(null);
+//        }
+//        task.setAssignee(assignee);
 
 //        TaskStatus taskStatus = null;
 //        if (dto.getStatus() != null) {
@@ -89,12 +89,12 @@ public class TaskService {
         taskMapper.update(data, task);
 
         //
-        var assigneeId = data.getAssignee_id();
-        if (assigneeId != null) {
-            var assignee = assigneeId.get() == null ? null
-                    : userRepository.findById(assigneeId.get()).orElseThrow();
-            task.setAssignee(assignee);
-        }
+//        var assigneeId = data.getAssignee_id(); //!!!
+//        if (assigneeId != null) {
+//            var assignee = assigneeId.get() == null ? null
+//                    : userRepository.findById(assigneeId.get()).orElseThrow();
+//            task.setAssignee(assignee);
+//        }
 
 //        TaskStatus taskStatus = null;
 //        if (data.getStatus() != null) {
