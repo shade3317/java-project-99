@@ -16,9 +16,9 @@ import org.springframework.stereotype.Service;
 
 //
 //import hexlet.code.model.Label;
-import hexlet.code.model.TaskStatus;
+//import hexlet.code.model.TaskStatus;
 import hexlet.code.model.User;
-import hexlet.code.repository.TaskStatusRepository;
+//import hexlet.code.repository.TaskStatusRepository;
 
 import hexlet.code.repository.UserRepository;
 //import hexlet.code.repository.LabelRepository;
@@ -33,7 +33,7 @@ public class TaskService {
     private final TaskRepository       taskRepository;
     private final TaskMapper           taskMapper;
     private final TaskSpecification    taskSpecification;
-    private final TaskStatusRepository taskStatusRepository;
+    //private final TaskStatusRepository taskStatusRepository;
     private final UserRepository       userRepository;
     //private final LabelRepository      labelRepository;
 
@@ -65,11 +65,11 @@ public class TaskService {
         }
         task.setAssignee(assignee);
 
-        TaskStatus taskStatus = null;
-        if (dto.getStatus() != null) {
-            taskStatus = taskStatusRepository.findBySlug(dto.getStatus()).orElse(null);
-        }
-        task.setTaskStatus(taskStatus);
+//        TaskStatus taskStatus = null;
+//        if (dto.getStatus() != null) {
+//            taskStatus = taskStatusRepository.findBySlug(dto.getStatus()).orElse(null);
+//        }
+//        task.setTaskStatus(taskStatus);
 
 //        Set<Label> labelSet = null;
 //        if (dto.getTaskLabelIds() != null) {
@@ -96,11 +96,11 @@ public class TaskService {
             task.setAssignee(assignee);
         }
 
-        TaskStatus taskStatus = null;
-        if (data.getStatus() != null) {
-            taskStatus = taskStatusRepository.findBySlug(data.getStatus().get()).orElse(null);
-            task.setTaskStatus(taskStatus);
-        }
+//        TaskStatus taskStatus = null;
+//        if (data.getStatus() != null) {
+//            taskStatus = taskStatusRepository.findBySlug(data.getStatus().get()).orElse(null);
+//            task.setTaskStatus(taskStatus);
+//        }
 
 //        Set<Label> labelSet = null;
 //        if (data.getTaskLabelIds() != null) {
