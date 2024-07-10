@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 
 //
-import hexlet.code.model.Label;
+//import hexlet.code.model.Label;
 import hexlet.code.model.TaskStatus;
 import hexlet.code.model.User;
 import hexlet.code.repository.TaskStatusRepository;
@@ -23,7 +23,7 @@ import hexlet.code.repository.TaskStatusRepository;
 import hexlet.code.repository.UserRepository;
 import hexlet.code.repository.LabelRepository;
 
-import java.util.Set;
+//import java.util.Set;
 //
 
 
@@ -35,7 +35,7 @@ public class TaskService {
     private final TaskSpecification    taskSpecification;
     private final TaskStatusRepository taskStatusRepository;
     private final UserRepository       userRepository;
-    private final LabelRepository      labelRepository;
+    //private final LabelRepository      labelRepository;
 
 
     public List<TaskDto> getAll(TaskParamsDto params) {
@@ -71,11 +71,11 @@ public class TaskService {
         }
         task.setTaskStatus(taskStatus);
 
-        Set<Label> labelSet = null;
-        if (dto.getTaskLabelIds() != null) {
-            labelSet = labelRepository.findByIdIn((dto.getTaskLabelIds())).orElse(null);
-        }
-        task.setLabels(labelSet);
+//        Set<Label> labelSet = null;
+//        if (dto.getTaskLabelIds() != null) {
+//            labelSet = labelRepository.findByIdIn((dto.getTaskLabelIds())).orElse(null);
+//        }
+//        task.setLabels(labelSet);
         //
 
         taskRepository.save(task);
@@ -102,11 +102,11 @@ public class TaskService {
             task.setTaskStatus(taskStatus);
         }
 
-        Set<Label> labelSet = null;
-        if (data.getTaskLabelIds() != null) {
-            labelSet = labelRepository.findByIdIn((data.getTaskLabelIds()).get()).orElse(null);
-            task.setLabels(labelSet);
-        }
+//        Set<Label> labelSet = null;
+//        if (data.getTaskLabelIds() != null) {
+//            labelSet = labelRepository.findByIdIn((data.getTaskLabelIds()).get()).orElse(null);
+//            task.setLabels(labelSet);
+//        }
         //
 
         taskRepository.save(task);
