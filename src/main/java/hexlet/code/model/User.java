@@ -3,18 +3,18 @@ package hexlet.code.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+//import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.OneToMany;
+//import jakarta.persistence.OneToMany;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.CascadeType;
+//import jakarta.persistence.FetchType;
+//import jakarta.persistence.CascadeType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -54,8 +54,8 @@ public class User implements UserDetails, BaseEntity {
     private LocalDate updatedAt;
 
 
-    @OneToMany(mappedBy = "assignee", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    private List<Task> tasks = new ArrayList<>();
+    //@OneToMany(mappedBy = "assignee", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    //private List<Task> tasks = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
