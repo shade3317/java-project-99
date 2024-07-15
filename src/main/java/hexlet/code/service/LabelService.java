@@ -6,6 +6,7 @@ import hexlet.code.mapper.LabelMapper;
 import hexlet.code.repository.LabelRepository;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class LabelService {
 
     public LabelDto getById(Long id) {
         var label = labelRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Метка с id " + id + " не найдена"));
+                .orElseThrow(() -> new NoSuchElementException("Метка с id " + id + " не найдена"));
         return labelMapper.map(label);
     }
 
@@ -39,7 +40,7 @@ public class LabelService {
 
     public LabelDto update(LabelUpdateDto dto, Long id) {
         var label = labelRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Метка с id " + id + " не найдена"));
+                .orElseThrow(() -> new NoSuchElementException("Метка с id " + id + " не найдена"));
         labelMapper.update(dto, label);
         labelRepository.save(label);
         return labelMapper.map(label);

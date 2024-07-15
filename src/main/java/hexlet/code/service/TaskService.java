@@ -11,6 +11,7 @@ import hexlet.code.model.User;
 import hexlet.code.repository.UserRepository;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class TaskService {
 
     public TaskDto findById(Long id) {
         var task = taskRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Задача с id " + id + " не найдена"));
+                .orElseThrow(() -> new NoSuchElementException("Задача с id " + id + " не найдена"));
 
         var result = taskMapper.map(task);
         return result;
@@ -57,7 +58,7 @@ public class TaskService {
 
     public TaskDto update(TaskUpdateDto data, Long taskId) {
         var task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new RuntimeException("Задача с id: " + taskId + " не найдена"));
+                .orElseThrow(() -> new NoSuchElementException("Задача с id: " + taskId + " не найдена"));
 
         taskMapper.update(data, task);
 

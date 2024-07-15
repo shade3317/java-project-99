@@ -6,6 +6,7 @@ import hexlet.code.mapper.UserMapper;
 import hexlet.code.repository.UserRepository;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class UserService {
 
     public UserDTO findById(Long id) {
         var user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Пользователь с id " + id + " не найден"));
+                .orElseThrow(() -> new NoSuchElementException("Пользователь с id " + id + " не найден"));
         return userMapper.map(user);
     }
 
@@ -40,7 +41,7 @@ public class UserService {
 
     public UserDTO update(UserUpdateDTO userUpdateDTO, Long id) {
         var user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Пользователь с id " + id + " не найден"));
+                .orElseThrow(() -> new NoSuchElementException("Пользователь с id " + id + " не найден"));
         userMapper.update(userUpdateDTO, user);
         userRepository.save(user);
         return userMapper.map(user);

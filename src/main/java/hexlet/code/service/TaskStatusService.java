@@ -6,6 +6,7 @@ import hexlet.code.mapper.TaskStatusMapper;
 import hexlet.code.repository.TaskStatusRepository;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class TaskStatusService {
 
     public TaskStatusDto findById(Long id) {
         var status = taskStatusRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Статус с id " + id + " не найден"));
+                .orElseThrow(() -> new NoSuchElementException("Статус с id " + id + " не найден"));
 
         var result = taskStatusMapper.map(status);
         return result;
@@ -42,7 +43,7 @@ public class TaskStatusService {
 
     public TaskStatusDto update(TaskStatusUpdateDto dto, Long id) {
         var status = taskStatusRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Статус с id " + id + " не найден"));
+                .orElseThrow(() -> new NoSuchElementException("Статус с id " + id + " не найден"));
 
         taskStatusMapper.update(dto, status);
         taskStatusRepository.save(status);

@@ -8,6 +8,7 @@ import hexlet.code.model.TaskStatus;
 import hexlet.code.repository.LabelRepository;
 import hexlet.code.repository.TaskStatusRepository;
 
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -63,7 +64,7 @@ public abstract class TaskMapper {
 
     public TaskStatus toTaskStatus(String statusSlug) {
         return statusRepository.findBySlug(statusSlug)
-                .orElseThrow(() -> new RuntimeException("TaskStatus с slug " + statusSlug + " не найден"));
+                .orElseThrow(() -> new NoSuchElementException("TaskStatus с slug " + statusSlug + " не найден"));
     }
 
     public Set<Long> toDto(Set<Label> labels) {
