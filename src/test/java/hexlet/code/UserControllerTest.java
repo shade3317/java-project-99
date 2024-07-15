@@ -146,4 +146,15 @@ public class UserControllerTest {
         mockMvc.perform(request)
                 .andExpect(status().isForbidden());
     }
+
+    @Test
+    public void testDeleteUserAnotherUser() throws Exception {
+        userRepository.save(testUser);
+        userRepository.save(anotherUser);
+
+        var request = delete("/api/users/" + testUser.getId()).with(tokenAnotherUser);
+
+        mockMvc.perform(request)
+                .andExpect(status().isForbidden());
+    }
 }
