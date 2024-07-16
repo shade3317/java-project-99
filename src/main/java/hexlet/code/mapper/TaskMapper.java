@@ -5,7 +5,6 @@ import hexlet.code.dto.task.TaskUpdateDto;
 import hexlet.code.model.Label;
 import hexlet.code.model.Task;
 import hexlet.code.model.TaskStatus;
-import hexlet.code.model.User;
 import hexlet.code.repository.LabelRepository;
 import hexlet.code.repository.TaskStatusRepository;
 
@@ -13,7 +12,6 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import hexlet.code.repository.UserRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -35,8 +33,6 @@ public abstract class TaskMapper {
     private TaskStatusRepository statusRepository;
     @Autowired
     private LabelRepository      labelRepository;
-    @Autowired
-    private UserRepository userRepository;
 
 
     @Mapping(source = "title", target = "name")
@@ -86,12 +82,5 @@ public abstract class TaskMapper {
                 .map(labelId -> labelRepository.findById(labelId)
                         .orElseThrow())
                 .collect(Collectors.toSet());
-    }
-
-    public User toAssigneeId(Long assigneeId) {
-        if (assigneeId == 0L || assigneeId == null) {
-            return null;
-        }
-        return userRepository.findById(assigneeId).orElse(null);
     }
 }
