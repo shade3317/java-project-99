@@ -7,8 +7,8 @@ import hexlet.code.model.Task;
 import hexlet.code.model.TaskStatus;
 import hexlet.code.repository.LabelRepository;
 import hexlet.code.repository.TaskStatusRepository;
-import hexlet.code.model.User;
-import hexlet.code.repository.UserRepository;
+//import hexlet.code.model.User;
+//import hexlet.code.repository.UserRepository;
 
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -35,8 +35,8 @@ public abstract class TaskMapper {
     private TaskStatusRepository statusRepository;
     @Autowired
     private LabelRepository      labelRepository;
-    @Autowired
-    private UserRepository userRepository;
+    //@Autowired
+    //private UserRepository userRepository;
 
 
     @Mapping(source = "title", target = "name")
@@ -55,16 +55,17 @@ public abstract class TaskMapper {
 
     @Mapping(source = "title", target = "name")
     @Mapping(source = "status", target = "taskStatus")
-    @Mapping(source = "assignee_id", target = "assignee")
+    //@Mapping(source = "assignee_id", target = "assignee")
+    @Mapping(source = "assignee_id", target = "assignee.id")
     @Mapping(source = "taskLabelIds", target = "labels", qualifiedByName = "toEntity")
     public abstract void update(TaskUpdateDto dto, @MappingTarget Task model);
 
-    @Mapping(source = "taskStatus.slug", target = "status")
-    @Mapping(source = "assignee.id", target = "assignee_id")
-    @Mapping(source = "name", target = "title")
-    @Mapping(source = "description", target = "content")
-    @Mapping(source = "labels", target = "taskLabelIds")
-    public abstract TaskCreateDto mapToCreateDto(Task model);
+//    @Mapping(source = "taskStatus.slug", target = "status")
+//    @Mapping(source = "assignee.id", target = "assignee_id")
+//    @Mapping(source = "name", target = "title")
+//    @Mapping(source = "description", target = "content")
+//    @Mapping(source = "labels", target = "taskLabelIds")
+//    public abstract TaskCreateDto mapToCreateDto(Task model);
 
     public TaskStatus toTaskStatus(String statusSlug) {
         return statusRepository.findBySlug(statusSlug)
@@ -88,10 +89,10 @@ public abstract class TaskMapper {
                 .collect(Collectors.toSet());
     }
 
-    public User toAssigneeId(Long assigneeId) {
-        if (assigneeId == 0L || assigneeId == null) {
-            return null;
-        }
-        return userRepository.findById(assigneeId).orElse(null);
-    }
+//    public User toAssigneeId(Long assigneeId) {
+//        if (assigneeId == 0L || assigneeId == null) {
+//            return null;
+//        }
+//        return userRepository.findById(assigneeId).orElse(null);
+//    }
 }

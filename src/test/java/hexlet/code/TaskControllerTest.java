@@ -11,6 +11,7 @@ import hexlet.code.repository.TaskRepository;
 import hexlet.code.repository.UserRepository;
 import hexlet.code.util.ModelGenerator;
 
+import java.util.HashMap;
 import java.util.Set;
 
 import org.instancio.Instancio;
@@ -107,15 +108,36 @@ public class TaskControllerTest {
 
     @Test
     public void testCreate() throws Exception {
-        var newTask = Instancio.of(modelGenerator.getTestTask()).create();
-        newTask.setTaskStatus(testStatus);
-        newTask.setAssignee(testUser);
-        newTask.setLabels(Set.of(testLabel));
-        var dto = taskMapper.mapToCreateDto(newTask);
+//        var newTask = Instancio.of(modelGenerator.getTestTask()).create();
+//        newTask.setTaskStatus(testStatus);
+//        newTask.setAssignee(testUser);
+//        newTask.setLabels(Set.of(testLabel));
+//        var dto = taskMapper.mapToCreateDto(newTask);
+//
+//        var request = post("/api/tasks").with(token)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(objectMapper.writeValueAsString(dto));
+//
+//        mockMvc.perform(request)
+//                .andExpect(status().isCreated());
+//
+//        var task = taskRepository.findById(testTask.getId()).orElse(null);
+//        assertNotNull(task);
+//        assertThat(task.getIndex()).isEqualTo(testTask.getIndex());
+//        assertThat(task.getAssignee().getId()).isEqualTo(testTask.getAssignee().getId());
+//        assertThat(task.getDescription()).isEqualTo(testTask.getDescription());
+//        assertThat(task.getTaskStatus().getSlug()).isEqualTo(testTask.getTaskStatus().getSlug());
+//        assertThat(task.getName()).isEqualTo(testTask.getName());
+        var data = new HashMap<>();
+        data.put("title", testTask.getName());
+        data.put("index", testTask.getIndex());
+        data.put("content", testTask.getDescription());
+        data.put("status", testTask.getTaskStatus().getSlug());
+        data.put("assignee_id", testTask.getAssignee().getId());
 
         var request = post("/api/tasks").with(token)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(dto));
+                .content(objectMapper.writeValueAsString(data));
 
         mockMvc.perform(request)
                 .andExpect(status().isCreated());
