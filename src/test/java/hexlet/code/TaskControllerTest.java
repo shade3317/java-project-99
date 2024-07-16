@@ -108,26 +108,6 @@ public class TaskControllerTest {
 
     @Test
     public void testCreate() throws Exception {
-//        var newTask = Instancio.of(modelGenerator.getTestTask()).create();
-//        newTask.setTaskStatus(testStatus);
-//        newTask.setAssignee(testUser);
-//        newTask.setLabels(Set.of(testLabel));
-//        var dto = taskMapper.mapToCreateDto(newTask);
-//
-//        var request = post("/api/tasks").with(token)
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(objectMapper.writeValueAsString(dto));
-//
-//        mockMvc.perform(request)
-//                .andExpect(status().isCreated());
-//
-//        var task = taskRepository.findById(testTask.getId()).orElse(null);
-//        assertNotNull(task);
-//        assertThat(task.getIndex()).isEqualTo(testTask.getIndex());
-//        assertThat(task.getAssignee().getId()).isEqualTo(testTask.getAssignee().getId());
-//        assertThat(task.getDescription()).isEqualTo(testTask.getDescription());
-//        assertThat(task.getTaskStatus().getSlug()).isEqualTo(testTask.getTaskStatus().getSlug());
-//        assertThat(task.getName()).isEqualTo(testTask.getName());
         var data = new HashMap<>();
         data.put("title", testTask.getName());
         data.put("index", testTask.getIndex());

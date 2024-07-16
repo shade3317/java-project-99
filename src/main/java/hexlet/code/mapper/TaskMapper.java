@@ -36,14 +36,13 @@ public abstract class TaskMapper {
     @Autowired
     private LabelRepository      labelRepository;
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository       userRepository;
 
 
     @Mapping(source = "title", target = "name")
     @Mapping(source = "status", target = "taskStatus")
     @Mapping(source = "content", target = "description")
     @Mapping(source = "taskLabelIds", target = "labels", qualifiedByName = "toEntity")
-    //@Mapping(source = "assignee_id", target = "assignee.id")
     @Mapping(source = "assignee_id", target = "assignee")
     public abstract Task map(TaskCreateDto dto);
 
@@ -57,16 +56,8 @@ public abstract class TaskMapper {
     @Mapping(source = "title", target = "name")
     @Mapping(source = "status", target = "taskStatus")
     @Mapping(source = "assignee_id", target = "assignee")
-    //@Mapping(source = "assignee_id", target = "assignee.id")
     @Mapping(source = "taskLabelIds", target = "labels", qualifiedByName = "toEntity")
     public abstract void update(TaskUpdateDto dto, @MappingTarget Task model);
-
-//    @Mapping(source = "taskStatus.slug", target = "status")
-//    @Mapping(source = "assignee.id", target = "assignee_id")
-//    @Mapping(source = "name", target = "title")
-//    @Mapping(source = "description", target = "content")
-//    @Mapping(source = "labels", target = "taskLabelIds")
-//    public abstract TaskCreateDto mapToCreateDto(Task model);
 
     public TaskStatus toTaskStatus(String statusSlug) {
         return statusRepository.findBySlug(statusSlug)
@@ -94,6 +85,7 @@ public abstract class TaskMapper {
         if (assigneeId == 0L || assigneeId == null) {
             return null;
         }
+
         return userRepository.findById(assigneeId).orElse(null);
     }
 }
