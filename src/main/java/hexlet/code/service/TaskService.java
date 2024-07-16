@@ -7,8 +7,8 @@ import hexlet.code.mapper.TaskMapper;
 import hexlet.code.repository.TaskRepository;
 import hexlet.code.specification.TaskSpecification;
 
-import hexlet.code.model.User;
-import hexlet.code.repository.UserRepository;
+//import hexlet.code.model.User;
+//import hexlet.code.repository.UserRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -23,7 +23,7 @@ public class TaskService {
     private final TaskRepository       taskRepository;
     private final TaskMapper           taskMapper;
     private final TaskSpecification    taskSpecification;
-    private final UserRepository       userRepository;
+    //private final UserRepository       userRepository;
 
 
     public List<TaskDto> getAll(TaskParamsDto params) {
@@ -46,11 +46,11 @@ public class TaskService {
     public TaskDto create(TaskCreateDto dto) {
         var task = taskMapper.map(dto);
 
-        User assignee = null;
-        if (dto.getAssignee_id() != 0L) {
-            assignee = userRepository.findById(dto.getAssignee_id()).orElse(null);
-        }
-        task.setAssignee(assignee);
+//        User assignee = null;
+//        if (dto.getAssignee_id() != 0L) {
+//            assignee = userRepository.findById(dto.getAssignee_id()).orElse(null);
+//        }
+//        task.setAssignee(assignee);
 
         taskRepository.save(task);
         return taskMapper.map(task);
@@ -62,12 +62,12 @@ public class TaskService {
 
         taskMapper.update(data, task);
 
-        var assigneeId = data.getAssignee_id();
-        if (assigneeId != null) {
-            var assignee = assigneeId.get() == null ? null
-                    : userRepository.findById(assigneeId.get()).orElseThrow();
-            task.setAssignee(assignee);
-        }
+//        var assigneeId = data.getAssignee_id();
+//        if (assigneeId != null) {
+//            var assignee = assigneeId.get() == null ? null
+//                    : userRepository.findById(assigneeId.get()).orElseThrow();
+//            task.setAssignee(assignee);
+//        }
 
         taskRepository.save(task);
         return taskMapper.map(task);

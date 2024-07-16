@@ -7,6 +7,8 @@ import hexlet.code.model.Task;
 import hexlet.code.model.TaskStatus;
 import hexlet.code.repository.LabelRepository;
 import hexlet.code.repository.TaskStatusRepository;
+import hexlet.code.model.User;
+import hexlet.code.repository.UserRepository;
 
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -33,6 +35,8 @@ public abstract class TaskMapper {
     private TaskStatusRepository statusRepository;
     @Autowired
     private LabelRepository      labelRepository;
+    @Autowired
+    private UserRepository userRepository;
 
 
     @Mapping(source = "title", target = "name")
@@ -82,5 +86,12 @@ public abstract class TaskMapper {
                 .map(labelId -> labelRepository.findById(labelId)
                         .orElseThrow())
                 .collect(Collectors.toSet());
+    }
+
+    public User toAssigneeId(Long assigneeId) {
+        if (assigneeId == 0L || assigneeId == null) {
+            return null;
+        }
+        return userRepository.findById(assigneeId).orElse(null);
     }
 }
