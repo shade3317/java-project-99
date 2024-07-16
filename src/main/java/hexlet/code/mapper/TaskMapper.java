@@ -7,8 +7,8 @@ import hexlet.code.model.Task;
 import hexlet.code.model.TaskStatus;
 import hexlet.code.repository.LabelRepository;
 import hexlet.code.repository.TaskStatusRepository;
-//import hexlet.code.model.User;
-//import hexlet.code.repository.UserRepository;
+import hexlet.code.model.User;
+import hexlet.code.repository.UserRepository;
 
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -35,15 +35,16 @@ public abstract class TaskMapper {
     private TaskStatusRepository statusRepository;
     @Autowired
     private LabelRepository      labelRepository;
-    //@Autowired
-    //private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
 
     @Mapping(source = "title", target = "name")
     @Mapping(source = "status", target = "taskStatus")
     @Mapping(source = "content", target = "description")
     @Mapping(source = "taskLabelIds", target = "labels", qualifiedByName = "toEntity")
-    @Mapping(source = "assignee_id", target = "assignee.id")
+    //@Mapping(source = "assignee_id", target = "assignee.id")
+    @Mapping(source = "assignee_id", target = "assignee")
     public abstract Task map(TaskCreateDto dto);
 
     @Mapping(source = "name", target = "title")
@@ -55,8 +56,8 @@ public abstract class TaskMapper {
 
     @Mapping(source = "title", target = "name")
     @Mapping(source = "status", target = "taskStatus")
-    //@Mapping(source = "assignee_id", target = "assignee")
-    @Mapping(source = "assignee_id", target = "assignee.id")
+    @Mapping(source = "assignee_id", target = "assignee")
+    //@Mapping(source = "assignee_id", target = "assignee.id")
     @Mapping(source = "taskLabelIds", target = "labels", qualifiedByName = "toEntity")
     public abstract void update(TaskUpdateDto dto, @MappingTarget Task model);
 
@@ -89,10 +90,10 @@ public abstract class TaskMapper {
                 .collect(Collectors.toSet());
     }
 
-//    public User toAssigneeId(Long assigneeId) {
-//        if (assigneeId == 0L || assigneeId == null) {
-//            return null;
-//        }
-//        return userRepository.findById(assigneeId).orElse(null);
-//    }
+    public User toAssigneeId(Long assigneeId) {
+        if (assigneeId == 0L || assigneeId == null) {
+            return null;
+        }
+        return userRepository.findById(assigneeId).orElse(null);
+    }
 }
